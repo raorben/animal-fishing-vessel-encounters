@@ -16,11 +16,34 @@ Files<-list.files(paste0(GFWDataDir,"daily_csvs/"),pattern = ".csv",full.names =
 files.sources = list.files(paste0(gitdir,"R"), full.names = TRUE)
 sapply(X = files.sources, FUN=source)
 
+#to download the daily csv files go here:
+#https://globalfishingwatch.org/data-download/datasets/public-fisshing-effort-10:v20200316
+# 
+# Daily Fishing Effort at 10th Degree Resolution by MMSI, version 1.0 (2012-2016)
+# Description
+# This dataset contains the original release of the Global Fishing Watch fishing effort data and 
+#includes fishing effort by MMSI binned into grid cells 0.1 degrees on a side, and measured in 
+#units of hours. The time is calculated by assigning an amount of time to each AIS detection 
+#(which is half the time to the previous plus half the time to the next AIS position). To get 
+#information on each MMSI, see Global Fishing Watch data on fishing vessels.
+# 
+# For additional information about these results, see the associated journal article: 
+#D.A. Kroodsma, J. Mayorga, T. Hochberg, N.A. Miller, K. Boerder, F. Ferretti, A. Wilson, 
+#B. Bergman, T.D. White, B.A. Block, P. Woods, B. Sullivan, C. Costello, and B. Worm. 
+#"Tracking the global footprint of fisheries." Science 361.6378 (2018).
+# 
+# GitHub repository for Tracking the global footprint of fisheries: 
+#https://github.com/GlobalFishingWatch/paper-global-footprint-of-fisheries
+# Unless otherwise stated, Global Fishing Watch data is licensed under a 
+#Creative Commons Attribution-ShareAlike 4.0 International license and code under an Apache 2.0 license.
+
 #Global fishing watch lat/lon bins
 #lat_bin: the southern edge of the grid cell, 
 #in 10ths of a degree -- 101 is the grid cell with a southern edge at 1.01 degrees north
 #lon_bin: the western edge of the grid cell, 
 #in 10ths of a degree -- 101 is the grid cell with a western edge at 1.01 degrees east
+
+
 
 for (i in 1:length(Files)){ #each iteration takes ~50sec
 start.time <- Sys.time()

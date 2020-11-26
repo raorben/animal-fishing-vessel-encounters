@@ -88,7 +88,9 @@ alllocs<-readRDS(paste0(userdir,"/Analysis/compileddata/Interpolate10_BFALLAAL_1
 alllocs$lon360<-wrap360(alllocs$lon)
 alllocs$global_oid<-1:nrow(alllocs)
 unique(year(alllocs$datetime))
+
 alllocs$yearT<-year(alllocs$datetime)
+
 nrow(alllocs[is.na(alllocs$yearT)==TRUE,])
 nrow(alllocs[(alllocs$yearT)==2011,])
 
@@ -181,73 +183,4 @@ ggplot()+
   theme(legend.position = "right")+facet_wrap(~species)+
   theme_classic()
 quartz.save(paste0(userdir,"/Analysis/PLOTS/GFW_albatross_1day_LR1_30km.png"), dpi=300)
-
-
-# Hourly Interpolated LAAL & BFAL -----------------------------------------
-alllocs<-readRDS(paste0(userdir,"/Analysis/compileddata/Interpolate10_BFALLAAL_60minbytrip.rds"))
-
-#alllocs<-readRDS(paste0(userdir,"/Analysis/compileddata/AlbatrossData_bytrip.rda"))
-alllocs$lon360<-wrap360(alllocs$lon)
-alllocs$global_oid<-1:nrow(alllocs)
-unique(year(alllocs$datetime))
-alllocs$yearT<-year(alllocs$datetime)
-nrow(alllocs[is.na(alllocs$yearT)==TRUE,])
-nrow(alllocs[(alllocs$yearT)==2011,])
-
-alllocs<-alllocs[(alllocs$yearT)!=2011,]
-alllocs<-alllocs[(alllocs$datetime)>"2012-01-02 00:00:00 GMT",] #removed the first day of 2012 since the raster came out differently
-min(alllocs$datetime)
-
-# Prep for extraction -----------------------------------------------------
-# Extract GFWd ---------------------------------------------------------
-
-# buffer -------------------------------------------------------------
-#need to create a weird column to match the names in the RasterStack 
-#the names come from the file names
-alllocs$dt_name<-paste0("X",year(alllocs$datetime),padz(month(alllocs$datetime),2),padz(day(alllocs$datetime),2))
-
-buffersize_m=c(3000,30000,80000)
-croplim=2
-
-locs2012<-cropNextract(rasterstackG=GFW12,tracks=alllocs,yr=2012,buffersize_m,croplim)
-saveRDS(locs2012, file=paste0(userdir,"/Analysis/compileddata/Hr_LABFAL_Albatross_GFWbuff_2012_LR1.rda"))
-#locs2012<-readRDS(file=paste0(userdir,"/Analysis/compileddata/Albatross_GFWbuff_2012_LR1.rda"))
-
-#we are missing May 31, 2013 (noted: 8.30.2017)
-alllocs13<-alllocs[alllocs$datetime<as.POSIXct("2013-05-31 00:00:00",tz= "GMT") | alllocs$datetime>as.POSIXct("2013-05-31 23:59:59",tz= "GMT") ,]
-locs2013<-cropNextract(rasterstackG=GFW13,tracks=alllocs13,yr=2013,buffersize_m,croplim)
-saveRDS(locs2013, file=paste0(userdir,"/Analysis/compileddata/Hr_LABFAL_Albatross_GFWbuff_2013_LR1.rda"))
-#locs2013<-readRDS(file=paste0(userdir,"/Analysis/compileddata/Albatross_GFWbuff_2013_LR1.rda"))
-
-locs2014<-cropNextract(rasterstackG=GFW14,tracks=alllocs,yr=2014,buffersize_m,croplim)
-saveRDS(locs2014, file=paste0(userdir,"/Analysis/compileddata/Hr_LABFAL_Albatross_GFWbuff_2014_LR1.rda"))
-#locs2014<-readRDS(file=paste0(userdir,"/Analysis/compileddata/Albatross_GFWbuff_2014_LR1.rda"))
-
-locs2015<-cropNextract(rasterstackG=GFW15,tracks=alllocs,yr=2015,buffersize_m,croplim)
-saveRDS(locs2015, file=paste0(userdir,"/Analysis/compileddata/Hr_LABFAL_Albatross_GFWbuff_2015_LR1.rda"))
-#locs2015<-readRDS(file=paste0(userdir,"/Analysis/compileddata/Albatross_GFWbuff_2015_LR1.rda"))
-
-locs2016<-cropNextract(rasterstackG=GFW16,tracks=alllocs,yr=2016,buffersize_m,croplim)
-saveRDS(locs2016, file=paste0(userdir,"/Analysis/compileddata/Hr_LABFAL_Albatross_GFWbuff_2016_LR1.rda"))
-#locs2016<-readRDS(file=paste0(userdir,"/Analysis/compileddata/Albatross_GFWbuff_2016_LR1.rda"))
-
-alllocsG<-rbind(locs2012,locs2013,locs2014,locs2015,locs2016)
-
-#make a nested factor 
-alllocsG$fishing<-"no boat"
-alllocsG$fishing[alllocsG$GFWdM_80km==1]<-80
-alllocsG$fishing[alllocsG$GFWdM_30km==1]<-30
-alllocsG$fishing[alllocsG$GFWdM_3km==1]<-3
-alllocsG$fishingF <- factor(alllocsG$fishing, levels = c("3","30","80","no boat"))
-
-alllocsG$yearT<-year(alllocsG$datetime)
-alllocsG$lon360<-wrap360(alllocsG$lon)
-
-
-
-colnames(alllocsG)
-alllocsGG <- alllocsG %>% group_by(ID) %>% arrange(datetime)
-dt<-Sys.Date()
-
-saveRDS(alllocsGG, file=paste0(userdir,"/Analysis/compileddata/Hr_LABFAL_Albatross_GFWbuff_LR1_",dt,".rda"))
 

@@ -1,5 +1,3 @@
-rm(list=ls())
-
 library(raster)
 library(sp)
 library(rgdal)
@@ -12,70 +10,70 @@ library(readr)
 library(ggplot2)
 library(viridis)
 
-wrap360 = function(lon) {lon360<-ifelse(lon<0,lon+360,lon);return(lon360)}
-
-if(Sys.info()[7]=="rachaelorben") userdir<-'/Users/rachaelorben/Dropbox/Research/GlobalFishingWatch'
+if(Sys.info()[6]=="rachaelorben") {GFWDataDir<-"/Volumes/GoogleDrive/My Drive/GFW fishing effort/fishing_effort_byvessel/";
+gitdir<-"/Users/rachaelorben/git_repos/animal-fishing-vessel-encounters/"} ##RAO
 
 #bring in GFW Functions
-source(paste0(userdir,"/Analysis/scripts/Functions_AlbatrossGFW.R"))
+files.sources = list.files(paste0(gitdir,"R"), full.names = TRUE)
+sapply(X = files.sources, FUN=source)
 
 # make a raster stack  ------------------------------------------
 
-# # list path to seasonal files
-# files <- list.files(paste0("/Volumes/GoogleDrive/My Drive/GFW fishing effort/fishing_effort_byvessel/daily_geotiffs"), pattern = ".tif",full.names=TRUE,recursive = T)
-# 
-# files12<-subset(files, grepl("2012",files))
-# files13<-subset(files, grepl("2013",files))
-# files14<-subset(files, grepl("2014",files))
-# files15<-subset(files, grepl("2015",files))
-# files16<-subset(files, grepl("2016",files))
-# #files17<-subset(files, grepl("2017",files))
-# 
-# # 2012: stack the list of rasters into a RasterStack object  --------------
-# adt_list<-NULL
-# for (i in 1: length(files12)){
-#   dayR <- raster(files12[i])
-#   adt_list <- c(adt_list, list(dayR))
-# }
-# GFW12 <- stack(adt_list)
-# saveRDS(GFW12, file = paste0(userdir,"/Analysis/compileddata/GFW12_rasterstack_1.rda"))
-# 
-# # 2013: stack the list of rasters into a RasterStack object  --------------
-# adt_list<-NULL
-# for (i in 1: length(files13)){
-#   dayR <- raster(files13[i])
-#   adt_list <- c(adt_list, list(dayR))
-# }
-# GFW13 <- stack(adt_list)
-# saveRDS(GFW13, file = paste0(userdir,"/Analysis/compileddata/GFW13_rasterstack_1.rda"))
-# 
-# # 2014: stack the list of rasters into a RasterStack object  --------------
-# adt_list<-NULL
-# for (i in 1: length(files14)){
-#   dayR <- raster(files14[i])
-#   adt_list <- c(adt_list, list(dayR))
-# }
-# GFW14 <- stack(adt_list)
-# saveRDS(GFW14, file = paste0(userdir,"/Analysis/compileddata/GFW14_rasterstack_1.rda"))
-# 
-# # 2015: stack the list of rasters into a RasterStack object  --------------
-# adt_list<-NULL
-# for (i in 1: length(files15)){
-#   dayR <- raster(files15[i])
-#   adt_list <- c(adt_list, list(dayR))
-# }
-# GFW15 <- stack(adt_list)
-# saveRDS(GFW15, file = paste0(userdir,"/Analysis/compileddata/GFW15_rasterstack_1.rda"))
-# 
-# # 2016: stack the list of rasters into a RasterStack object  --------------
-# adt_list<-NULL
-# for (i in 1: length(files16)){
-#   dayR <- raster(files16[i])
-#   adt_list <- c(adt_list, list(dayR))
-# }
-# GFW16 <- stack(adt_list)
-# saveRDS(GFW16, file = paste0(userdir,"/Analysis/compileddata/GFW16_rasterstack_1.rda"))
-# 
+# list path to seasonal files
+files <- list.files(paste0("/Volumes/GoogleDrive/My Drive/GFW fishing effort/fishing_effort_byvessel/daily_geotiffs"), pattern = ".tif",full.names=TRUE,recursive = T)
+
+files12<-subset(files, grepl("2012",files))
+files13<-subset(files, grepl("2013",files))
+files14<-subset(files, grepl("2014",files))
+files15<-subset(files, grepl("2015",files))
+files16<-subset(files, grepl("2016",files))
+#files17<-subset(files, grepl("2017",files))
+
+# 2012: stack the list of rasters into a RasterStack object  --------------
+adt_list<-NULL
+for (i in 1: length(files12)){
+  dayR <- raster(files12[i])
+  adt_list <- c(adt_list, list(dayR))
+}
+GFW12 <- stack(adt_list)
+saveRDS(GFW12, file = paste0(userdir,"/Analysis/compileddata/GFW12_rasterstack_1.rda"))
+
+# 2013: stack the list of rasters into a RasterStack object  --------------
+adt_list<-NULL
+for (i in 1: length(files13)){
+  dayR <- raster(files13[i])
+  adt_list <- c(adt_list, list(dayR))
+}
+GFW13 <- stack(adt_list)
+saveRDS(GFW13, file = paste0(userdir,"/Analysis/compileddata/GFW13_rasterstack_1.rda"))
+
+# 2014: stack the list of rasters into a RasterStack object  --------------
+adt_list<-NULL
+for (i in 1: length(files14)){
+  dayR <- raster(files14[i])
+  adt_list <- c(adt_list, list(dayR))
+}
+GFW14 <- stack(adt_list)
+saveRDS(GFW14, file = paste0(userdir,"/Analysis/compileddata/GFW14_rasterstack_1.rda"))
+
+# 2015: stack the list of rasters into a RasterStack object  --------------
+adt_list<-NULL
+for (i in 1: length(files15)){
+  dayR <- raster(files15[i])
+  adt_list <- c(adt_list, list(dayR))
+}
+GFW15 <- stack(adt_list)
+saveRDS(GFW15, file = paste0(userdir,"/Analysis/compileddata/GFW15_rasterstack_1.rda"))
+
+# 2016: stack the list of rasters into a RasterStack object  --------------
+adt_list<-NULL
+for (i in 1: length(files16)){
+  dayR <- raster(files16[i])
+  adt_list <- c(adt_list, list(dayR))
+}
+GFW16 <- stack(adt_list)
+saveRDS(GFW16, file = paste0(userdir,"/Analysis/compileddata/GFW16_rasterstack_1.rda"))
+
 
 # load GFW raster stack ---------------------------------------------------
 GFW12<-readRDS(file = paste0(userdir,"/Analysis/compileddata/GFW12_rasterstack_1.rda"))
@@ -87,7 +85,6 @@ GFW16<-readRDS(file = paste0(userdir,"/Analysis/compileddata/GFW16_rasterstack_1
 # load GPS tracking data --------------------------------------------------
 alllocs<-readRDS(paste0(userdir,"/Analysis/compileddata/Interpolate10_BFALLAAL_10minbytrip_STAL1hr.rds"))
 
-#alllocs<-readRDS(paste0(userdir,"/Analysis/compileddata/AlbatrossData_bytrip.rda"))
 alllocs$lon360<-wrap360(alllocs$lon)
 alllocs$global_oid<-1:nrow(alllocs)
 unique(year(alllocs$datetime))

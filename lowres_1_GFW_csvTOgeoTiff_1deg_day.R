@@ -3,14 +3,18 @@ library(data.table)
 library(sp)
 library(rgdal)
 
-wrap360 = function(lon) {
-  lon360<-ifelse(lon<0,lon+360,lon)
-  return(lon360)
-}
+#Rachael Orben Nov 26, 2020
+#Makes geoTiffs from Global Fishing Watch daily csv files
+#geoTiffs are trimmed to the study area at line #40
 
 # Directory with daily GFW .csv files
-if(Sys.info()[6]=="rachaelorben") GFWDataDir<-"/Volumes/GoogleDrive/My Drive/GFW fishing effort/fishing_effort_byvessel/" ##RAO
+if(Sys.info()[6]=="rachaelorben") {GFWDataDir<-"/Volumes/GoogleDrive/My Drive/GFW fishing effort/fishing_effort_byvessel/";
+gitdir<-"/Users/rachaelorben/git_repos/animal-fishing-vessel-encounters/"} ##RAO
+
 Files<-list.files(paste0(GFWDataDir,"daily_csvs/"),pattern = ".csv",full.names = F,recursive = F)
+
+files.sources = list.files(paste0(gitdir,"R"), full.names = TRUE)
+sapply(X = files.sources, FUN=source)
 
 #Global fishing watch lat/lon bins
 #lat_bin: the southern edge of the grid cell, 

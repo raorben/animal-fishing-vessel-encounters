@@ -2,7 +2,7 @@
 R scripts to extract animal-fishing vessel encounters using the Global Fishing Watch datasets and animal tracking data. 
 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4486561.svg)](https://zenodo.org/badge/latestdoi/221094317)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4486561.svg)](https://doi.org/10.5281/zenodo.4486561)
 ![GitHub tag (latest
 SemVer)](https://img.shields.io/github/tag/raorben/animal-fishing-vessel-encounters.svg?color=blue&label=Version)
 

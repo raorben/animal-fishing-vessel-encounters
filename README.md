@@ -5,7 +5,7 @@ The script series "lowres" is intended to overlay animal tracking data on gridde
 
 The scripts are from:
 
-Orben RA, LG Torres, J Adams, M Hester, SA Shaffer, MG Conners, L Young K Ozaki, F Sato, T Deguchi, RM Suryan, D Koordesma. Across borders: External factors and prior behavior influence North Pacific albatross associations with fishing vessels. Journal of Applied Ecology. In press
+Orben RA, LG Torres, J Adams, M Hester, SA Shaffer, MG Conners, L Young K Ozaki, F Sato, T Deguchi, RM Suryan, D Koordesma. 2021. Across borders: External factors and prior behavior influence North Pacific albatross associations with fishing vessels. Journal of Applied Ecology. 
 
 These scripts represent the framework for the dataproccessing and analysis methods applied in the paper. Please don't expect them to be fully operational without some fiddling. Rather they are here to provide specific documentation of the methods used and to be a resource for future analysis. 
 

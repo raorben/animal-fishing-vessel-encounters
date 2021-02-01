@@ -8,7 +8,6 @@ SemVer)](https://img.shields.io/github/tag/raorben/animal-fishing-vessel-encount
 
 Cite as: Orben, R.A. animal-fishing-vessel-encounters. Version 1.0 GitHub
 repository. <https://github.com/raorben/animal-fishing-vessel-encounters>
-https://zenodo.org/badge/latestdoi/221094317
 <DOI:10.5281/zenodo.221094317>
 
 

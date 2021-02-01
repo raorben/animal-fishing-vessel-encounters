@@ -1,6 +1,18 @@
 # animal-fishing-vessel-encounters
 R scripts to extract animal-fishing vessel encounters using the Global Fishing Watch datasets and animal tracking data. 
 
+
+[![DOI](https://zenodo.org/badge/221094317.svg)](https://zenodo.org/badge/latestdoi/221094317)
+![GitHub tag (latest
+SemVer)](https://img.shields.io/github/tag/raorben/animal-fishing-vessel-encounters.svg?color=blue&label=Version)
+
+Cite as: Orben, R.A. animal-fishing-vessel-encounters. Version 1.0 GitHub
+repository. <https://github.com/raorben/animal-fishing-vessel-encounters>
+https://zenodo.org/badge/latestdoi/221094317
+<DOI:10.5281/zenodo.221094317>
+
+
+
 The script series "lowres" is intended to overlay animal tracking data on gridded Global Fishing Watch data to produce potential overlap events (daily scale, with user defined radius). The script series "highres" does the same with the higher resolution dataset. These are the most transferable to other projects. 
 
 The scripts are from:
